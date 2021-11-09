@@ -5,12 +5,16 @@ info:
   version: 1.0.0
 servers:
   - url: 'https://jsonplaceholder.typicode.com'
+tags:
+  - name: json-placeholder
 paths:
   /users:
     get:
       summary: Returns a list of users.
       description: Returns a list of users.
       operationId: getUsers
+      tags:
+        - json-placeholder
       responses:
         '200':
           description: OK
@@ -23,6 +27,8 @@ paths:
       summary: Returns a user.
       description: Returns a user.
       operationId: getUser
+      tags:
+        - json-placeholder
       parameters:
         - name: id
           in: path
@@ -41,6 +47,8 @@ paths:
       summary: Returns a list of posts.
       description: Returns a list of posts.
       operationId: getPosts
+      tags:
+        - json-placeholder
       responses:
         '200':
           description: OK
@@ -53,6 +61,8 @@ paths:
       summary: Returns a post.
       description: Returns a post.
       operationId: getPost
+      tags:
+        - json-placeholder
       parameters:
         - name: id
           in: path
@@ -71,6 +81,8 @@ paths:
       summary: Returns a list of comments.
       description: Returns a list of comments.
       operationId: getComments
+      tags:
+        - json-placeholder
       responses:
         '200':
           description: OK
@@ -83,6 +95,8 @@ paths:
       summary: Returns a comment.
       description: Returns a comment.
       operationId: getComment
+      tags:
+        - json-placeholder
       parameters:
         - name: id
           in: path
@@ -101,6 +115,8 @@ paths:
       summary: Returns a list of albums.
       description: Returns a list of albums.
       operationId: getAlbums
+      tags:
+        - json-placeholder
       responses:
         '200':
           description: OK
@@ -113,6 +129,8 @@ paths:
       summary: Returns a album.
       description: Returns a album.
       operationId: getAlbum
+      tags:
+        - json-placeholder
       parameters:
         - name: id
           in: path
@@ -131,6 +149,8 @@ paths:
       summary: Returns a list of photos.
       description: Returns a list of photos.
       operationId: getPhotos
+      tags:
+        - json-placeholder
       responses:
         '200':
           description: OK
@@ -143,6 +163,8 @@ paths:
       summary: Returns a photo.
       description: Returns a photo.
       operationId: getPhoto
+      tags:
+        - json-placeholder
       parameters:
         - name: id
           in: path
@@ -161,6 +183,8 @@ paths:
       summary: Returns a list of todos.
       description: Returns a list of todos.
       operationId: getTodos
+      tags:
+        - json-placeholder
       responses:
         '200':
           description: OK
@@ -173,6 +197,8 @@ paths:
       summary: Returns a todo.
       description: Returns a todo.
       operationId: getTodo
+      tags:
+        - json-placeholder
       parameters:
         - name: id
           in: path
