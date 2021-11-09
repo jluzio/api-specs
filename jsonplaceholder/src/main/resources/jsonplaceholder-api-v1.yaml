@@ -1,0 +1,320 @@
+openapi: 3.0.3
+info:
+  title: jsonplaceholder
+  description: OpenAPI for jsonplaceholder
+  version: 1.0.0
+servers:
+  - url: 'https://jsonplaceholder.typicode.com'
+paths:
+  /users:
+    get:
+      summary: Returns a list of users.
+      description: Returns a list of users.
+      operationId: getUsers
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserList'
+  /users/{id}:
+    get:
+      summary: Returns a user.
+      description: Returns a user.
+      operationId: getUser
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+  /posts:
+    get:
+      summary: Returns a list of posts.
+      description: Returns a list of posts.
+      operationId: getPosts
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PostList'
+  /posts/{id}:
+    get:
+      summary: Returns a post.
+      description: Returns a post.
+      operationId: getPost
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Post'
+  /comments:
+    get:
+      summary: Returns a list of comments.
+      description: Returns a list of comments.
+      operationId: getComments
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommentList'
+  /comments/{id}:
+    get:
+      summary: Returns a comment.
+      description: Returns a comment.
+      operationId: getComment
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Comment'
+  /albums:
+    get:
+      summary: Returns a list of albums.
+      description: Returns a list of albums.
+      operationId: getAlbums
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AlbumList'
+  /albums/{id}:
+    get:
+      summary: Returns a album.
+      description: Returns a album.
+      operationId: getAlbum
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Album'
+  /photos:
+    get:
+      summary: Returns a list of photos.
+      description: Returns a list of photos.
+      operationId: getPhotos
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PhotoList'
+  /photos/{id}:
+    get:
+      summary: Returns a photo.
+      description: Returns a photo.
+      operationId: getPhoto
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Photo'
+  /todos:
+    get:
+      summary: Returns a list of todos.
+      description: Returns a list of todos.
+      operationId: getTodos
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TodoList'
+  /todos/{id}:
+    get:
+      summary: Returns a todo.
+      description: Returns a todo.
+      operationId: getTodo
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Todo'
+
+components:
+  schemas:
+    UserList:
+      type: array
+      items:
+        $ref: '#/components/schemas/User'
+    PostList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Post'
+    CommentList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Comment'
+    AlbumList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Album'
+    PhotoList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Photo'
+    TodoList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Todo'
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        username:
+          type: string
+        email:
+          type: string
+        address:
+          $ref: '#/components/schemas/Address'
+        phone:
+          type: string
+        website:
+          type: string
+        company:
+          $ref: '#/components/schemas/Company'
+    Address:
+      type: object
+      properties:
+        street:
+          type: string
+        suite:
+          type: string
+        city:
+          type: string
+        zipcode:
+          type: string
+        geo:
+          $ref: '#/components/schemas/GeoLocation'
+    GeoLocation:
+      type: object
+      properties:
+        lat:
+          type: string
+        lng:
+          type: string
+    Company:
+      type: object
+      properties:
+        name:
+          type: string
+        catchPhrase:
+          type: string
+        bs:
+          type: string
+    Post:
+      type: object
+      properties:
+        id:
+          type: integer
+        userId:
+          type: integer
+        title:
+          type: string
+        body:
+          type: string
+    Comment:
+      type: object
+      properties:
+        id:
+          type: integer
+        postId:
+          type: integer
+        name:
+          type: string
+        email:
+          type: string
+        body:
+          type: string
+    Todo:
+      type: object
+      properties:
+        id:
+          type: integer
+        userId:
+          type: integer
+        title:
+          type: string
+        completed:
+          type: boolean
+    Album:
+      type: object
+      properties:
+        id:
+          type: integer
+        userId:
+          type: integer
+        title:
+          type: string
+    Photo:
+      type: object
+      properties:
+        id:
+          type: integer
+        albumId:
+          type: integer
+        title:
+          type: string
+        url:
+          type: string
+        thumbnailUrl:
+          type: string
