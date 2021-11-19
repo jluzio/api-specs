@@ -1,0 +1,9 @@
+#debug: true
+
+logging:
+  level:
+    root: WARN
+    com.example.api: DEBUG
+    org.springframework: INFO
+    org.springframework.web.filter.CommonsRequestLoggingFilter: DEBUG
+    org.apache.http.wire: DEBUG

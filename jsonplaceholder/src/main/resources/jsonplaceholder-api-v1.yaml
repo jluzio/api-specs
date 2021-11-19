@@ -15,6 +15,27 @@ paths:
       operationId: getUsers
       tags:
         - json-placeholder
+      parameters:
+        - name: id
+          in: query
+          required: false
+          schema:
+            type: integer
+        - name: username
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: name
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: email
+          in: query
+          required: false
+          schema:
+            type: string
       responses:
         '200':
           description: OK
@@ -42,6 +63,66 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/User'
+  /user/{userId}/posts:
+    get:
+      summary: Returns a list of posts.
+      description: Returns a list of posts.
+      operationId: getUserPosts
+      tags:
+        - json-placeholder
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PostList'
+  /user/{userId}/albums:
+    get:
+      summary: Returns a list of albums.
+      description: Returns a list of albums.
+      operationId: getUserAlbums
+      tags:
+        - json-placeholder
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AlbumList'
+  /user/{userId}/todos:
+    get:
+      summary: Returns a list of todos.
+      description: Returns a list of todos.
+      operationId: getUserTodos
+      tags:
+        - json-placeholder
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TodoList'
   /posts:
     get:
       summary: Returns a list of posts.
@@ -49,6 +130,22 @@ paths:
       operationId: getPosts
       tags:
         - json-placeholder
+      parameters:
+        - name: userId
+          in: query
+          required: false
+          schema:
+            type: integer
+        - name: id
+          in: query
+          required: false
+          schema:
+            type: integer
+        - name: title
+          in: query
+          required: false
+          schema:
+            type: string
       responses:
         '200':
           description: OK
@@ -76,6 +173,26 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Post'
+  /posts/{postId}/comments:
+    get:
+      summary: Returns a list of comments.
+      description: Returns a list of comments.
+      operationId: getPostComments
+      tags:
+        - json-placeholder
+      parameters:
+        - name: postId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommentList'
   /comments:
     get:
       summary: Returns a list of comments.
@@ -83,6 +200,27 @@ paths:
       operationId: getComments
       tags:
         - json-placeholder
+      parameters:
+        - name: postId
+          in: query
+          required: false
+          schema:
+            type: integer
+        - name: id
+          in: query
+          required: false
+          schema:
+            type: integer
+        - name: name
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: email
+          in: query
+          required: false
+          schema:
+            type: string
       responses:
         '200':
           description: OK
@@ -117,6 +255,22 @@ paths:
       operationId: getAlbums
       tags:
         - json-placeholder
+      parameters:
+        - name: userId
+          in: query
+          required: false
+          schema:
+            type: integer
+        - name: id
+          in: query
+          required: false
+          schema:
+            type: integer
+        - name: title
+          in: query
+          required: false
+          schema:
+            type: string
       responses:
         '200':
           description: OK
@@ -144,6 +298,26 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Album'
+  /albums/{albumId}/photos:
+    get:
+      summary: Returns a list of photos.
+      description: Returns a list of photos.
+      operationId: getAlbumPhotos
+      tags:
+        - json-placeholder
+      parameters:
+        - name: albumId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PhotoList'
   /photos:
     get:
       summary: Returns a list of photos.
@@ -151,6 +325,32 @@ paths:
       operationId: getPhotos
       tags:
         - json-placeholder
+      parameters:
+        - name: albumId
+          in: query
+          required: false
+          schema:
+            type: integer
+        - name: id
+          in: query
+          required: false
+          schema:
+            type: integer
+        - name: title
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: url
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: thumbnailUrl
+          in: query
+          required: false
+          schema:
+            type: string
       responses:
         '200':
           description: OK
@@ -185,6 +385,27 @@ paths:
       operationId: getTodos
       tags:
         - json-placeholder
+      parameters:
+        - name: userId
+          in: query
+          required: false
+          schema:
+            type: integer
+        - name: id
+          in: query
+          required: false
+          schema:
+            type: integer
+        - name: title
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: completed
+          in: query
+          required: false
+          schema:
+            type: boolean
       responses:
         '200':
           description: OK

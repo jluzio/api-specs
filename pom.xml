@@ -12,6 +12,7 @@
 
   <modules>
     <module>jsonplaceholder</module>
+    <module>client</module>
   </modules>
 
 </project>
