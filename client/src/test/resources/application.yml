@@ -6,4 +6,11 @@ logging:
     com.example.api: DEBUG
     org.springframework: INFO
     org.springframework.web.filter.CommonsRequestLoggingFilter: DEBUG
+#    org.apache.http: WARN
+#    org.apache.http.headers: DEBUG
     org.apache.http.wire: DEBUG
+#    org.apache.http.wire: ERROR
+#    org.apache.http.impl.conn: WARN
+#    org.apache.http.impl.client: WARN
+#    org.apache.http.client: WARN
+
