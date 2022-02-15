@@ -7,7 +7,7 @@
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
-    <version>2.5.6</version>
+    <version>2.6.3</version>
     <relativePath/> <!-- lookup parent from repository -->
   </parent>
 
@@ -17,12 +17,12 @@
 
   <properties>
     <java.version>17</java.version>
-    <camel.version>3.12.0</camel.version>
     <lombok.version>1.18.22</lombok.version>
     <lombok-mapstruct-binding.version>0.2.0</lombok-mapstruct-binding.version>
     <org.mapstruct.version>1.4.2.Final</org.mapstruct.version>
-    <boat-maven-plugin.version>0.15.0</boat-maven-plugin.version>
-
+    <openapi-generator-maven-plugin.version>5.3.0</openapi-generator-maven-plugin.version>
+    <boat-maven-plugin.version>0.15.4</boat-maven-plugin.version>
+<!--    <boat-maven-plugin.version>0.10.0</boat-maven-plugin.version>-->
     <spec.resources.path>${project.build.directory}/specs</spec.resources.path>
   </properties>
 
@@ -30,6 +30,10 @@
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-validation</artifactId>
     </dependency>
 
     <dependency>
@@ -132,33 +136,6 @@
         </executions>
       </plugin>
       <plugin>
-        <groupId>org.openapitools</groupId>
-        <artifactId>openapi-generator-maven-plugin</artifactId>
-        <version>5.3.0</version>
-        <executions>
-          <execution>
-            <id>generate-jsonplaceholder-api</id>
-            <goals>
-              <goal>generate</goal>
-            </goals>
-            <phase>generate-sources</phase>
-            <configuration>
-              <generatorName>java</generatorName>
-              <inputSpec>${spec.resources.path}/jsonplaceholder/jsonplaceholder-api-v1.0.0.yaml</inputSpec>
-              <generateApiTests>false</generateApiTests>
-              <generateModelTests>false</generateModelTests>
-              <configOptions>
-                <library>resttemplate</library>
-                <dateLibrary>java8</dateLibrary>
-                <apiPackage>com.example.api.jsonplaceholder.api.v1</apiPackage>
-                <modelPackage>com.example.api.jsonplaceholder.api.v1.model</modelPackage>
-                <useBeanValidation>true</useBeanValidation>
-              </configOptions>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
-      <plugin>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
         <configuration>
@@ -196,5 +173,80 @@
       </plugin>
     </plugins>
   </build>
+
+  <profiles>
+    <profile>
+      <id>openapi-generator-maven-plugin</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.openapitools</groupId>
+            <artifactId>openapi-generator-maven-plugin</artifactId>
+            <version>${openapi-generator-maven-plugin.version}</version>
+            <executions>
+              <execution>
+                <id>generate-jsonplaceholder-api</id>
+                <goals>
+                  <goal>generate</goal>
+                </goals>
+                <phase>generate-sources</phase>
+                <configuration>
+                  <generatorName>java</generatorName>
+                  <inputSpec>${spec.resources.path}/jsonplaceholder/jsonplaceholder-api-v1.0.0.yaml</inputSpec>
+                  <generateApiTests>false</generateApiTests>
+                  <generateModelTests>false</generateModelTests>
+                  <configOptions>
+                    <library>resttemplate</library>
+                    <dateLibrary>java8</dateLibrary>
+                    <apiPackage>com.example.api.jsonplaceholder.api.v1</apiPackage>
+                    <modelPackage>com.example.api.jsonplaceholder.api.v1.model</modelPackage>
+                    <useBeanValidation>true</useBeanValidation>
+                  </configOptions>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+    <profile>
+      <id>boat-maven-plugin</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>com.backbase.oss</groupId>
+            <artifactId>boat-maven-plugin</artifactId>
+            <version>${boat-maven-plugin.version}</version>
+            <executions>
+              <execution>
+                <id>generate-jsonplaceholder-api</id>
+                <goals>
+                  <goal>generate-spring-boot-embedded</goal>
+                </goals>
+                <phase>generate-sources</phase>
+                <configuration>
+                  <generatorName>java</generatorName>
+                  <inputSpec>${spec.resources.path}/jsonplaceholder/jsonplaceholder-api-v1.0.0.yaml</inputSpec>
+                  <generateApiTests>false</generateApiTests>
+                  <generateModelTests>false</generateModelTests>
+                  <configOptions>
+                    <library>resttemplate</library>
+                    <dateLibrary>java8</dateLibrary>
+                    <apiPackage>com.example.api.jsonplaceholder.api.v1</apiPackage>
+                    <modelPackage>com.example.api.jsonplaceholder.api.v1.model</modelPackage>
+                    <useBeanValidation>true</useBeanValidation>
+                    <useWithModifiers>true</useWithModifiers>
+                  </configOptions>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
 
 </project>
