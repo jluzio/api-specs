@@ -14,7 +14,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.web.client.RestTemplate;
 
-@SpringBootTest(classes = ClientTest.TestConfig.class)
+@SpringBootTest
 @Slf4j
 class ClientTest {
 
