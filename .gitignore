@@ -105,3 +105,6 @@ overlays
 
 # Node
 node_modules
+
+# Custom
+.tmp

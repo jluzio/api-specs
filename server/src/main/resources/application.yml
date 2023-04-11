@@ -1,0 +1,22 @@
+logging:
+  level:
+    com.example: DEBUG
+    org.springframework: INFO
+    org.springframework.web.filter.CommonsRequestLoggingFilter: DEBUG
+#    org.springframework.web.servlet.mvc.method.annotation: TRACE
+#    org.springframework.boot.autoconfigure: DEBUG
+#    org.springframework.web: TRACE
+
+# https://springdoc.org/#springdoc-openapi-core-properties
+# https://springdoc.org/#swagger-ui-properties
+
+#spring:
+#  data:
+#    rest:
+#      basePath: /api
+
+# as env var: APP_HTTP_REQUEST_LOGGING_FILTER_MAX_PAYLOAD_LENGTH=128
+app:
+  http:
+    request-logging-filter:
+      max-payload-length: 128

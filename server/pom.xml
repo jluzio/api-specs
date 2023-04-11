@@ -12,7 +12,7 @@
   </parent>
 
   <groupId>com.example.api</groupId>
-  <artifactId>client</artifactId>
+  <artifactId>server</artifactId>
   <version>1.0.0</version>
 
   <properties>
@@ -22,7 +22,7 @@
     <org.mapstruct.version>1.5.3.Final</org.mapstruct.version>
     <openapi-generator-maven-plugin.version>6.5.0</openapi-generator-maven-plugin.version>
     <boat-maven-plugin.version>0.17.1</boat-maven-plugin.version>
-<!--    <boat-maven-plugin.version>0.16.11</boat-maven-plugin.version>-->
+    <!--    <boat-maven-plugin.version>0.16.11</boat-maven-plugin.version>-->
     <spec.resources.path>${project.build.directory}/specs</spec.resources.path>
   </properties>
 
@@ -65,53 +65,33 @@
     </dependency>
 
     <dependency>
-      <groupId>org.openapitools</groupId>
-      <artifactId>jackson-databind-nullable</artifactId>
-      <version>0.2.3</version>
-    </dependency>
-    <dependency>
       <groupId>com.google.code.findbugs</groupId>
       <artifactId>jsr305</artifactId>
       <version>3.0.2</version>
     </dependency>
     <dependency>
-      <groupId>org.springdoc</groupId>
-      <artifactId>springdoc-openapi-ui</artifactId>
-      <version>1.7.0</version>
+      <groupId>org.openapitools</groupId>
+      <artifactId>jackson-databind-nullable</artifactId>
+      <version>0.2.6</version>
     </dependency>
+    <dependency>
+      <groupId>io.swagger.core.v3</groupId>
+      <artifactId>swagger-core-jakarta</artifactId>
+      <version>2.2.9</version>
+    </dependency>
+<!--
     <dependency>
       <groupId>io.swagger.core.v3</groupId>
       <artifactId>swagger-annotations</artifactId>
       <version>2.2.9</version>
     </dependency>
-    <!--
-        <dependency>
-          <groupId>io.swagger</groupId>
-          <artifactId>swagger-annotations</artifactId>
-          <version>1.6.10</version>
-        </dependency>
-    -->
+-->
+
     <dependency>
-      <groupId>org.openapitools</groupId>
-      <artifactId>jackson-databind-nullable</artifactId>
-      <version>0.2.6</version>
+      <groupId>org.springdoc</groupId>
+      <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+      <version>2.1.0</version>
     </dependency>
-    <!--
-        <dependency>
-          <groupId>org.springframework.data</groupId>
-          <artifactId>spring-data-commons</artifactId>
-        </dependency>
-        <dependency>
-          <groupId>io.springfox</groupId>
-          <artifactId>springfox-core</artifactId>
-          <version>3.0.0</version>
-        </dependency>
-        <dependency>
-          <groupId>com.google.code.findbugs</groupId>
-          <artifactId>jsr305</artifactId>
-          <version>3.0.2</version>
-        </dependency>
-    -->
 
     <dependency>
       <groupId>org.springframework.boot</groupId>
@@ -136,6 +116,13 @@
             <configuration>
               <outputDirectory>${spec.resources.path}</outputDirectory>
               <artifactItems>
+                <artifactItem>
+                  <groupId>com.example.api</groupId>
+                  <artifactId>todo-api</artifactId>
+                  <version>1.0.0</version>
+                  <classifier>api</classifier>
+                  <type>zip</type>
+                </artifactItem>
                 <artifactItem>
                   <groupId>com.example.api</groupId>
                   <artifactId>jsonplaceholder-api</artifactId>
@@ -200,6 +187,34 @@
             <artifactId>openapi-generator-maven-plugin</artifactId>
             <version>${openapi-generator-maven-plugin.version}</version>
             <executions>
+              <execution>
+                <id>generate-todo-api</id>
+                <goals>
+                  <goal>generate</goal>
+                </goals>
+                <phase>generate-sources</phase>
+                <configuration>
+                  <generatorName>spring</generatorName>
+                  <inputSpec>${spec.resources.path}/todo-api/todo-api-v1.0.0.yaml</inputSpec>
+                  <generateApiTests>false</generateApiTests>
+                  <generateModelTests>false</generateModelTests>
+                  <configOptions>
+                    <library>spring-boot</library>
+                    <dateLibrary>java8</dateLibrary>
+                    <interfaceOnly>true</interfaceOnly>
+                    <skipDefaultInterface>true</skipDefaultInterface>
+                    <useBeanValidation>true</useBeanValidation>
+                    <useClassLevelBeanValidation>false</useClassLevelBeanValidation>
+                    <useTags>true</useTags>
+                    <java8>true</java8>
+                    <useOptional>false</useOptional>
+                    <apiPackage>com.example.api.todo.api.v1</apiPackage>
+                    <modelPackage>com.example.api.todo.api.v1.model</modelPackage>
+                    <useBeanValidation>true</useBeanValidation>
+                    <useJakartaEe>true</useJakartaEe>
+                  </configOptions>
+                </configuration>
+              </execution>
               <execution>
                 <id>generate-jsonplaceholder-api</id>
                 <goals>

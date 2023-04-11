@@ -11,8 +11,10 @@
   <packaging>pom</packaging>
 
   <modules>
-    <module>jsonplaceholder</module>
+    <module>jsonplaceholder-api</module>
+    <module>todo-api</module>
     <module>client</module>
+    <module>server</module>
   </modules>
 
 </project>

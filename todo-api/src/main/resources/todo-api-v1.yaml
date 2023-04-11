@@ -1,0 +1,84 @@
+openapi: 3.0.3
+info:
+  title: jsonplaceholder
+  description: OpenAPI for jsonplaceholder
+  version: 1.0.0
+servers:
+  - url: 'https://jsonplaceholder.typicode.com'
+tags:
+  - name: todo
+paths:
+
+  /todos:
+    get:
+      summary: Returns a list of todos.
+      description: Returns a list of todos.
+      operationId: getTodos
+      tags:
+        - todo
+      parameters:
+        - name: userId
+          in: query
+          required: false
+          schema:
+            type: integer
+        - name: id
+          in: query
+          required: false
+          schema:
+            type: integer
+        - name: title
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: completed
+          in: query
+          required: false
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TodoList'
+  /todos/{id}:
+    get:
+      summary: Returns a todo.
+      description: Returns a todo.
+      operationId: getTodo
+      tags:
+        - todo
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Todo'
+
+components:
+  schemas:
+    TodoList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Todo'
+    Todo:
+      type: object
+      properties:
+        id:
+          type: integer
+        userId:
+          type: integer
+        title:
+          type: string
+        completed:
+          type: boolean

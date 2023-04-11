@@ -5,13 +5,14 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.example.api</groupId>
-  <artifactId>jsonplaceholder</artifactId>
-  <version>1.0.0-SNAPSHOT</version>
+  <artifactId>todo-api</artifactId>
+  <version>1.0.0</version>
 
   <properties>
-    <boat-maven-plugin.version>0.16.5</boat-maven-plugin.version>
+    <boat-maven-plugin.version>0.17.1</boat-maven-plugin.version>
+    <!--    <boat-maven-plugin.version>0.16.11</boat-maven-plugin.version>-->
     <ignored-lint-rules>150,219,215,218,166,136,174,235,107,171,224,143,151,129,146,147,172,145,115,132,120,134,183,154,105,104,130,118,110,153,101,176,116,M009,H002,M010,H001,M008,S005,S006,S007,M011,M0012</ignored-lint-rules>
-    <api.filename>jsonplaceholder-api-v1.yaml</api.filename>
+    <api.filename>todo-api-v1.yaml</api.filename>
   </properties>
 
   <build>
@@ -71,7 +72,7 @@
               <inputSpec>${project.build.directory}</inputSpec>
               <output>${project.basedir}/target/boat-lint-reports</output>
               <writeLintReport>true</writeLintReport>
-<!--              <failOnWarning>true</failOnWarning>-->
+              <!--<failOnWarning>true</failOnWarning>-->
               <failOnWarning>false</failOnWarning>
             </configuration>
           </execution>
@@ -91,7 +92,9 @@
         </executions>
       </plugin>
       <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-assembly-plugin</artifactId>
+        <version>3.5.0</version>
         <executions>
           <execution>
             <id>assemble-api-zip</id>
