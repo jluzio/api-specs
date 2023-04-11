@@ -17,16 +17,14 @@ paths:
       tags:
         - todo
       parameters:
-        - name: userId
+        - name: ids
           in: query
+#          explode: false
           required: false
           schema:
-            type: integer
-        - name: id
-          in: query
-          required: false
-          schema:
-            type: integer
+            type: array
+            items:
+              type: integer
         - name: title
           in: query
           required: false
