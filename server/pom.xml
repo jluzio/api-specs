@@ -77,20 +77,12 @@
     <dependency>
       <groupId>io.swagger.core.v3</groupId>
       <artifactId>swagger-core-jakarta</artifactId>
-      <version>2.2.9</version>
+      <version>2.2.21</version>
     </dependency>
-<!--
-    <dependency>
-      <groupId>io.swagger.core.v3</groupId>
-      <artifactId>swagger-annotations</artifactId>
-      <version>2.2.9</version>
-    </dependency>
--->
-
     <dependency>
       <groupId>org.springdoc</groupId>
       <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
-      <version>2.1.0</version>
+      <version>2.5.0</version>
     </dependency>
 
     <dependency>
@@ -105,7 +97,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-dependency-plugin</artifactId>
-        <version>3.5.0</version>
+        <version>3.6.1</version>
         <executions>
           <execution>
             <id>unpack</id>
@@ -150,7 +142,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.11.0</version>
+        <version>3.13.0</version>
         <configuration>
           <annotationProcessorPaths>
             <path>
@@ -242,26 +234,13 @@
       </build>
     </profile>
     <profile>
-      <id>openapi-generator-maven-plugin-other_library</id>
-      <dependencyManagement>
-        <dependencies>
-          <dependency>
-            <groupId>org.jboss.resteasy</groupId>
-            <artifactId>resteasy-bom</artifactId>
-            <version>3.15.3.Final</version>
-            <type>pom</type>
-            <scope>import</scope>
-          </dependency>
-        </dependencies>
-      </dependencyManagement>
+      <id>openapi-generator-maven-plugin-jaxrs</id>
       <dependencies>
         <dependency>
-          <groupId>org.jboss.resteasy</groupId>
-          <artifactId>resteasy-client</artifactId>
-        </dependency>
-        <dependency>
-          <groupId>org.jboss.resteasy</groupId>
-          <artifactId>resteasy-multipart-provider</artifactId>
+          <groupId>jakarta.platform</groupId>
+          <artifactId>jakarta.jakartaee-api</artifactId>
+          <version>10.0.0</version>
+          <scope>provided</scope>
         </dependency>
       </dependencies>
       <build>
@@ -272,6 +251,38 @@
             <version>${openapi-generator-maven-plugin.version}</version>
             <executions>
               <execution>
+                <id>generate-todo-api</id>
+                <goals>
+                  <goal>generate</goal>
+                </goals>
+                <phase>generate-sources</phase>
+                <configuration>
+                  <generatorName>jaxrs-spec</generatorName>
+                  <inputSpec>${spec.resources.path}/todo-api/todo-api-v1.0.0.yaml</inputSpec>
+                  <generateApiTests>false</generateApiTests>
+                  <generateModelTests>false</generateModelTests>
+                  <configOptions>
+<!--                    <library>?</library>-->
+                    <dateLibrary>java8</dateLibrary>
+                    <interfaceOnly>true</interfaceOnly>
+                    <skipDefaultInterface>true</skipDefaultInterface>
+                    <useBeanValidation>true</useBeanValidation>
+                    <useClassLevelBeanValidation>false</useClassLevelBeanValidation>
+                    <useTags>true</useTags>
+                    <java8>true</java8>
+                    <useOptional>false</useOptional>
+                    <apiPackage>com.example.api.todo.api.v1</apiPackage>
+                    <modelPackage>com.example.api.todo.api.v1.model</modelPackage>
+                    <useJakartaEe>true</useJakartaEe>
+                    <!--
+                    NOTE: Currently (2024-05-06) the swagger annotations used are from 1.6.x instead of v3
+                    Disabled as workaround.
+                    -->
+                    <useSwaggerAnnotations>false</useSwaggerAnnotations>
+                  </configOptions>
+                </configuration>
+              </execution>
+              <execution>
                 <id>generate-jsonplaceholder-api</id>
                 <goals>
                   <goal>generate</goal>
@@ -279,15 +290,16 @@
                 <phase>generate-sources</phase>
                 <configuration>
                   <generatorName>java</generatorName>
-                  <inputSpec>${spec.resources.path}/jsonplaceholder/jsonplaceholder-api-v1.0.0.yaml</inputSpec>
+                  <inputSpec>${spec.resources.path}/jsonplaceholder-api/jsonplaceholder-api-v1.0.0.yaml</inputSpec>
                   <generateApiTests>false</generateApiTests>
                   <generateModelTests>false</generateModelTests>
                   <configOptions>
-                    <library>resteasy</library>
+                    <library>resttemplate</library>
                     <dateLibrary>java8</dateLibrary>
                     <apiPackage>com.example.api.jsonplaceholder.api.v1</apiPackage>
                     <modelPackage>com.example.api.jsonplaceholder.api.v1.model</modelPackage>
                     <useBeanValidation>true</useBeanValidation>
+                    <useJakartaEe>true</useJakartaEe>
                   </configOptions>
                 </configuration>
               </execution>
