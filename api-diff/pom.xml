@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.example.api</groupId>
+  <artifactId>api-diff</artifactId>
+  <version>1.0.0</version>
+
+  <properties>
+    <openapi-diff-version>2.1.0-beta.11</openapi-diff-version>
+  </properties>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.openapitools.openapidiff</groupId>
+        <artifactId>openapi-diff-maven</artifactId>
+        <version>${openapi-diff-version}</version>
+        <executions>
+          <!--
+            execute: mvn compile
+            execute: mvn openapi-diff:diff@default (if 'target' exists)
+          -->
+          <execution>
+            <goals>
+              <goal>diff</goal>
+            </goals>
+            <phase>compile</phase>
+            <configuration>
+              <!-- Reference specification (file or url) -->
+              <oldSpec>${project.basedir}/src/main/api/openapi-test1.yaml</oldSpec>
+              <!-- New spec (file or url) -->
+              <newSpec>${project.basedir}/src/main/api/openapi-test3.yaml</newSpec>
+              <!-- Fail only if API changes broke backward compatibility (default: false) -->
+              <failOnIncompatible>true</failOnIncompatible>
+              <!-- Fail if API changed (default: false) -->
+              <failOnChanged>true</failOnChanged>
+              <!-- Supply file path for console output to file if desired. -->
+              <consoleOutputFileName>${project.basedir}/target/diff.txt</consoleOutputFileName>
+              <!-- Supply file path for json output to file if desired. -->
+              <jsonOutputFileName>${project.basedir}/target/diff.json</jsonOutputFileName>
+              <!-- Supply file path for markdown output to file if desired. -->
+              <markdownOutputFileName>${project.basedir}/target/diff.md</markdownOutputFileName>
+              <!-- Supply config file(s), e.g. to disable incompatibility checks. Later files override earlier files -->
+              <!--              <configFiles>-->
+              <!--                <configFile>my/config-file.yaml</configFile>-->
+              <!--              </configFiles>-->
+              <!-- Supply config properties, e.g. to disable incompatibility checks. Overrides configFiles. -->
+              <configProps>
+                <incompatible.response.enum.increased>false</incompatible.response.enum.increased>
+              </configProps>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+</project>
