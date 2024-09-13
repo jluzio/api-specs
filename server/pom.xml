@@ -7,7 +7,7 @@
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
-    <version>3.2.2</version>
+    <version>3.3.2</version>
     <relativePath/> <!-- lookup parent from repository -->
   </parent>
 
@@ -17,11 +17,11 @@
 
   <properties>
     <java.version>17</java.version>
-    <lombok.version>1.18.32</lombok.version>
+    <lombok.version>1.18.34</lombok.version>
     <lombok-mapstruct-binding.version>0.2.0</lombok-mapstruct-binding.version>
     <org.mapstruct.version>1.5.5.Final</org.mapstruct.version>
-    <openapi-generator-maven-plugin.version>7.5.0</openapi-generator-maven-plugin.version>
-    <boat-maven-plugin.version>0.17.33</boat-maven-plugin.version>
+    <openapi-generator-maven-plugin.version>7.8.0</openapi-generator-maven-plugin.version>
+    <boat-maven-plugin.version>0.17.47</boat-maven-plugin.version>
     <!--    <boat-maven-plugin.version>0.16.11</boat-maven-plugin.version>-->
     <spec.resources.path>${project.build.directory}/specs</spec.resources.path>
   </properties>
@@ -204,6 +204,7 @@
                     <modelPackage>com.example.api.todo.api.v1.model</modelPackage>
                     <useBeanValidation>true</useBeanValidation>
                     <useJakartaEe>true</useJakartaEe>
+                    <generateClientAsBean>true</generateClientAsBean>
                   </configOptions>
                 </configuration>
               </execution>
@@ -225,6 +226,7 @@
                     <modelPackage>com.example.api.jsonplaceholder.api.v1.model</modelPackage>
                     <useBeanValidation>true</useBeanValidation>
                     <useJakartaEe>true</useJakartaEe>
+                    <generateClientAsBean>true</generateClientAsBean>
                   </configOptions>
                 </configuration>
               </execution>
@@ -274,6 +276,7 @@
                     <apiPackage>com.example.api.todo.api.v1</apiPackage>
                     <modelPackage>com.example.api.todo.api.v1.model</modelPackage>
                     <useJakartaEe>true</useJakartaEe>
+                    <generateClientAsBean>true</generateClientAsBean>
                     <!--
                     NOTE: Currently (2024-05-06) the swagger annotations used are from 1.6.x instead of v3
                     Disabled as workaround.
