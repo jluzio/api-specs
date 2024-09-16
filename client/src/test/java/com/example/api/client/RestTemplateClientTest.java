@@ -1,9 +1,6 @@
 package com.example.api.client;
 
-import com.example.api.jsonplaceholder.api.v1.JsonPlaceholderApi;
-import com.example.api.jsonplaceholder.api.v1.model.Album;
-import com.example.api.jsonplaceholder.api.v1.model.Post;
-import java.util.List;
+import com.example.api.jsonplaceholder.resttemplate.api.v1.JsonPlaceholderApi;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,10 +13,10 @@ import org.springframework.web.client.RestTemplate;
 
 @SpringBootTest
 @Slf4j
-class ClientTest {
+class RestTemplateClientTest {
 
   @TestConfiguration
-  @ComponentScan("com.example.api")
+  @ComponentScan("com.example.api.jsonplaceholder.resttemplate")
   static class TestConfig {
 
     @Bean
@@ -39,14 +36,14 @@ class ClientTest {
   void test() {
     log.info("output: {}", api.getUserAlbums(1));
 
-    restTemplate.postForEntity(
-        "https://jsonplaceholder.typicode.com/posts",
-        new Post()
-            .title("user1 new-title")
-            .body("user1 new-body")
-            .userId(1)
-        , String.class
-    );
+//    restTemplate.postForEntity(
+//        "https://jsonplaceholder.typicode.com/posts",
+//        new Post()
+//            .title("user1 new-title")
+//            .body("user1 new-body")
+//            .userId(1)
+//        , String.class
+//    );
   }
 
 }

@@ -1,10 +1,10 @@
 openapi: 3.0.3
 info:
-  title: jsonplaceholder
-  description: OpenAPI for jsonplaceholder
+  title: todo-api
+  description: OpenAPI for todo
   version: 1.0.0
 servers:
-  - url: 'https://jsonplaceholder.typicode.com'
+  - url: 'http://localhost:8080'
 tags:
   - name: todo
 paths:

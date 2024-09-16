@@ -22,9 +22,22 @@
     <org.mapstruct.version>1.5.5.Final</org.mapstruct.version>
     <openapi-generator-maven-plugin.version>7.8.0</openapi-generator-maven-plugin.version>
     <boat-maven-plugin.version>0.17.47</boat-maven-plugin.version>
-<!--    <boat-maven-plugin.version>0.16.11</boat-maven-plugin.version>-->
+    <!--    <boat-maven-plugin.version>0.16.11</boat-maven-plugin.version>-->
     <spec.resources.path>${project.build.directory}/specs</spec.resources.path>
+    <spring-cloud.version>2023.0.3</spring-cloud.version>
   </properties>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-dependencies</artifactId>
+        <version>${spring-cloud.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
 
   <dependencies>
     <dependency>
@@ -161,10 +174,29 @@
 
   <profiles>
     <profile>
-      <id>openapi-generator-maven-plugin-default</id>
+      <id>default</id>
       <activation>
         <activeByDefault>true</activeByDefault>
       </activation>
+      <dependencies>
+        <!-- Feign -->
+        <dependency>
+          <groupId>org.springframework.cloud</groupId>
+          <artifactId>spring-cloud-starter-openfeign</artifactId>
+        </dependency>
+        <dependency>
+          <groupId>io.github.openfeign</groupId>
+          <artifactId>feign-okhttp</artifactId>
+        </dependency>
+        <dependency>
+          <groupId>io.github.openfeign</groupId>
+          <artifactId>feign-httpclient</artifactId>
+        </dependency>
+        <dependency>
+          <groupId>io.github.openfeign</groupId>
+          <artifactId>feign-jackson</artifactId>
+        </dependency>
+      </dependencies>
       <build>
         <plugins>
           <plugin>
@@ -173,7 +205,7 @@
             <version>${openapi-generator-maven-plugin.version}</version>
             <executions>
               <execution>
-                <id>generate-jsonplaceholder-api</id>
+                <id>generate-jsonplaceholder-api-resttemplate</id>
                 <goals>
                   <goal>generate</goal>
                 </goals>
@@ -186,8 +218,30 @@
                   <configOptions>
                     <library>resttemplate</library>
                     <dateLibrary>java8</dateLibrary>
-                    <apiPackage>com.example.api.jsonplaceholder.api.v1</apiPackage>
-                    <modelPackage>com.example.api.jsonplaceholder.api.v1.model</modelPackage>
+                    <apiPackage>com.example.api.jsonplaceholder.resttemplate.api.v1</apiPackage>
+                    <modelPackage>com.example.api.jsonplaceholder.resttemplate.api.v1.model</modelPackage>
+                    <useBeanValidation>true</useBeanValidation>
+                    <useJakartaEe>true</useJakartaEe>
+                    <generateClientAsBean>true</generateClientAsBean>
+                  </configOptions>
+                </configuration>
+              </execution>
+              <execution>
+                <id>generate-jsonplaceholder-api-feign</id>
+                <goals>
+                  <goal>generate</goal>
+                </goals>
+                <phase>generate-sources</phase>
+                <configuration>
+                  <generatorName>java</generatorName>
+                  <inputSpec>${spec.resources.path}/jsonplaceholder-api/jsonplaceholder-api-v1.0.0.yaml</inputSpec>
+                  <generateApiTests>false</generateApiTests>
+                  <generateModelTests>false</generateModelTests>
+                  <configOptions>
+                    <library>feign</library>
+                    <dateLibrary>java8</dateLibrary>
+                    <apiPackage>com.example.api.jsonplaceholder.feign.api.v1</apiPackage>
+                    <modelPackage>com.example.api.jsonplaceholder.feign.api.v1.model</modelPackage>
                     <useBeanValidation>true</useBeanValidation>
                     <useJakartaEe>true</useJakartaEe>
                     <generateClientAsBean>true</generateClientAsBean>
@@ -200,13 +254,25 @@
       </build>
     </profile>
     <profile>
-      <id>openapi-generator-maven-plugin-jaxrs</id>
+      <id>jaxrs</id>
       <dependencies>
+        <!-- JAX-RS -->
         <dependency>
           <groupId>jakarta.platform</groupId>
           <artifactId>jakarta.jakartaee-api</artifactId>
           <version>10.0.0</version>
           <scope>provided</scope>
+        </dependency>
+        <!-- TODO: Fix dependencies -->
+        <dependency>
+          <groupId>org.jboss.resteasy</groupId>
+          <artifactId>resteasy-jaxrs</artifactId>
+          <version>3.15.6.Final</version>
+        </dependency>
+        <dependency>
+          <groupId>org.jboss.resteasy</groupId>
+          <artifactId>resteasy-client</artifactId>
+          <version>6.1.0.Final</version>
         </dependency>
       </dependencies>
       <build>
@@ -217,22 +283,23 @@
             <version>${openapi-generator-maven-plugin.version}</version>
             <executions>
               <execution>
-                <id>generate-jsonplaceholder-api</id>
+                <id>generate-jsonplaceholder-api-jaxrs</id>
                 <goals>
                   <goal>generate</goal>
                 </goals>
                 <phase>generate-sources</phase>
                 <configuration>
                   <generatorName>java</generatorName>
-                  <inputSpec>${spec.resources.path}/jsonplaceholder/jsonplaceholder-api-v1.0.0.yaml</inputSpec>
+                  <inputSpec>${spec.resources.path}/jsonplaceholder-api/jsonplaceholder-api-v1.0.0.yaml</inputSpec>
                   <generateApiTests>false</generateApiTests>
                   <generateModelTests>false</generateModelTests>
                   <configOptions>
                     <library>resteasy</library>
                     <dateLibrary>java8</dateLibrary>
-                    <apiPackage>com.example.api.jsonplaceholder.api.v1</apiPackage>
-                    <modelPackage>com.example.api.jsonplaceholder.api.v1.model</modelPackage>
+                    <apiPackage>com.example.api.jsonplaceholder.jaxrs.api.v1</apiPackage>
+                    <modelPackage>com.example.api.jsonplaceholder.jaxrs.api.v1.model</modelPackage>
                     <useBeanValidation>true</useBeanValidation>
+                    <useJakartaEe>true</useJakartaEe>
                     <generateClientAsBean>true</generateClientAsBean>
                   </configOptions>
                 </configuration>
@@ -259,9 +326,9 @@
                 </goals>
                 <phase>generate-sources</phase>
                 <configuration>
-                  <inputSpec>${spec.resources.path}/jsonplaceholder/jsonplaceholder-api-v1.0.0.yaml</inputSpec>
-                  <apiPackage>com.example.api.jsonplaceholder.api.v1</apiPackage>
-                  <modelPackage>com.example.api.jsonplaceholder.api.v1.model</modelPackage>
+                  <inputSpec>${spec.resources.path}/jsonplaceholder-api/jsonplaceholder-api-v1.0.0.yaml</inputSpec>
+                  <apiPackage>com.example.api.jsonplaceholder.boat.api.v1</apiPackage>
+                  <modelPackage>com.example.api.jsonplaceholder.boat.api.v1.model</modelPackage>
                 </configuration>
               </execution>
             </executions>
