@@ -14,3 +14,10 @@ logging:
 #    org.apache.http.impl.client: WARN
 #    org.apache.http.client: WARN
 
+spring.cloud.openfeign:
+#  okhttp.enabled: true
+  client:
+    config:
+      data-api:
+        url: https://jsonplaceholder.typicode.com
+        loggerLevel: FULL

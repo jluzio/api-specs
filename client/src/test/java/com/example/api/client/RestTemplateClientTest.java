@@ -1,5 +1,7 @@
 package com.example.api.client;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import com.example.api.jsonplaceholder.resttemplate.api.v1.JsonPlaceholderApi;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
@@ -32,18 +34,13 @@ class RestTemplateClientTest {
   @Autowired
   RestTemplate restTemplate;
 
+  
   @Test
   void test() {
-    log.info("output: {}", api.getUserAlbums(1));
-
-//    restTemplate.postForEntity(
-//        "https://jsonplaceholder.typicode.com/posts",
-//        new Post()
-//            .title("user1 new-title")
-//            .body("user1 new-body")
-//            .userId(1)
-//        , String.class
-//    );
+    var user = api.getUser(1);
+    log.info("output: {}", user);
+    assertThat(user)
+        .isNotNull();
   }
 
 }

@@ -1,30 +1,44 @@
 package com.example.api.client;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
+import com.example.api.jsonplaceholder.feign.api.ApiClient;
 import com.example.api.jsonplaceholder.feign.api.v1.JsonPlaceholderApi;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.TestConfiguration;
-import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Bean;
 
 @SpringBootTest
 @Slf4j
 class FeignClientTest {
 
   @TestConfiguration
-  @ComponentScan("com.example.api.jsonplaceholder.feign")
   static class TestConfig {
 
+    @Bean
+    JsonPlaceholderApi jsonPlaceholderApi(ApiClient apiClient) {
+      return apiClient.buildClient(JsonPlaceholderApi.class);
+    }
+
+    @Bean
+    ApiClient apiClient() {
+      return new ApiClient();
+    }
   }
 
   @Autowired
   JsonPlaceholderApi api;
 
-  // TODO: fix test
+
   @Test
   void test() {
-    log.info("output: {}", api.getUserAlbums(1));
+    var user = api.getUser(1);
+    log.info("output: {}", user);
+    assertThat(user)
+        .isNotNull();
   }
 
 }
