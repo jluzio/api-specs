@@ -80,3 +80,9 @@ components:
           type: string
         completed:
           type: boolean
+        startTime:
+          type: string
+          format: date-time
+        deadline:
+          type: string
+          format: date-time

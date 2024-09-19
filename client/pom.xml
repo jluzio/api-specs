@@ -128,6 +128,13 @@
                   <classifier>api</classifier>
                   <type>zip</type>
                 </artifactItem>
+                <artifactItem>
+                  <groupId>com.example.api</groupId>
+                  <artifactId>todo-api</artifactId>
+                  <version>1.0.0</version>
+                  <classifier>api</classifier>
+                  <type>zip</type>
+                </artifactItem>
               </artifactItems>
             </configuration>
           </execution>
@@ -242,6 +249,53 @@
                     <dateLibrary>java8</dateLibrary>
                     <apiPackage>com.example.api.jsonplaceholder.feign.api.v1</apiPackage>
                     <modelPackage>com.example.api.jsonplaceholder.feign.api.v1.model</modelPackage>
+                    <useBeanValidation>true</useBeanValidation>
+                    <useJakartaEe>true</useJakartaEe>
+                    <generateClientAsBean>true</generateClientAsBean>
+                  </configOptions>
+                </configuration>
+              </execution>
+              <execution>
+                <id>generate-todo-api-resttemplate</id>
+                <goals>
+                  <goal>generate</goal>
+                </goals>
+                <phase>generate-sources</phase>
+                <configuration>
+                  <generatorName>java</generatorName>
+                  <inputSpec>${spec.resources.path}/todo-api/todo-api-v1.0.0.yaml</inputSpec>
+                  <generateApiTests>false</generateApiTests>
+                  <generateModelTests>false</generateModelTests>
+                  <configOptions>
+                    <library>resttemplate</library>
+                    <dateLibrary>java8</dateLibrary>
+                    <apiPackage>com.example.api.todo.resttemplate.api.v1</apiPackage>
+                    <modelPackage>com.example.api.todo.resttemplate.api.v1.model</modelPackage>
+                    <useBeanValidation>true</useBeanValidation>
+                    <useJakartaEe>true</useJakartaEe>
+                    <generateClientAsBean>true</generateClientAsBean>
+                  </configOptions>
+                </configuration>
+              </execution>
+              <execution>
+                <id>generate-todo-api-resttemplatecustom</id>
+                <goals>
+                  <goal>generate</goal>
+                </goals>
+                <phase>generate-sources</phase>
+                <configuration>
+                  <generatorName>java</generatorName>
+                  <inputSpec>${spec.resources.path}/todo-api/todo-api-v1.0.0.yaml</inputSpec>
+                  <generateApiTests>false</generateApiTests>
+                  <generateModelTests>false</generateModelTests>
+                  <typeMappings>
+                    <typeMapping>OffsetDateTime=java.time.Instant</typeMapping>
+                  </typeMappings>
+                  <configOptions>
+                    <library>resttemplate</library>
+                    <dateLibrary>java8</dateLibrary>
+                    <apiPackage>com.example.api.todo.resttemplatecustom.api.v1</apiPackage>
+                    <modelPackage>com.example.api.todo.resttemplatecustom.api.v1.model</modelPackage>
                     <useBeanValidation>true</useBeanValidation>
                     <useJakartaEe>true</useJakartaEe>
                     <generateClientAsBean>true</generateClientAsBean>
