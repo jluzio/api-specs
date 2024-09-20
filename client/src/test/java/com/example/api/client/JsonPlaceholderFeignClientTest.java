@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Bean;
 
 @SpringBootTest
 @Slf4j
-class FeignClientTest {
+class JsonPlaceholderFeignClientTest {
 
   @TestConfiguration
   static class TestConfig {
