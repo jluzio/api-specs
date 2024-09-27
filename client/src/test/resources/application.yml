@@ -5,6 +5,7 @@ logging:
     root: WARN
     com.example.api: DEBUG
     org.springframework: INFO
+    feign.Logger: DEBUG
     org.springframework.web.filter.CommonsRequestLoggingFilter: DEBUG
 #    org.apache.http: WARN
 #    org.apache.http.headers: DEBUG
@@ -15,9 +16,12 @@ logging:
 #    org.apache.http.client: WARN
 
 spring.cloud.openfeign:
-#  okhttp.enabled: true
+  okhttp.enabled: true
   client:
     config:
+      default:
+        loggerLevel: FULL
       data-api:
         url: https://jsonplaceholder.typicode.com
         loggerLevel: FULL
+#        loggerLevel: NONE
