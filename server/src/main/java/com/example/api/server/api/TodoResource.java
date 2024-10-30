@@ -6,6 +6,8 @@ import static org.apache.commons.lang3.StringUtils.contains;
 import com.example.api.server.service.TodoService;
 import com.example.api.todo.api.v1.TodoApi;
 import com.example.api.todo.api.v1.model.Todo;
+import com.example.api.todo.api.v1.model.TodoCreateRequest;
+import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.Objects;
 import java.util.function.Function;
@@ -55,4 +57,20 @@ public class TodoResource implements TodoApi {
             "Todo %s not found'".formatted(id)));
   }
 
+  @Override
+  public ResponseEntity<Todo> createTodo(TodoCreateRequest todoCreateRequest) {
+    return ResponseEntity.ok(todoService.createTodo(todoCreateRequest));
+  }
+
+  @Override
+  public ResponseEntity<Todo> createTodoFormData(Integer userId, String title, Boolean completed,
+      OffsetDateTime startTime, OffsetDateTime deadline) {
+    TodoCreateRequest todoCreateRequest = new TodoCreateRequest()
+        .userId(userId)
+        .title(title)
+        .completed(completed)
+        .startTime(startTime)
+        .deadline(deadline);
+    return createTodo(todoCreateRequest);
+  }
 }

@@ -42,6 +42,47 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/TodoList'
+    post:
+      summary: Creates a todo.
+      description: Creates a todo.
+      operationId: createTodo
+      tags:
+        - todo
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TodoCreateRequest'
+# Was unable to mix both with Spring
+#          application/x-www-form-urlencoded:
+#            schema:
+#              $ref: '#/components/schemas/TodoCreateRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Todo'
+  /todos/form-data:
+    post:
+      summary: Creates a todo.
+      description: Creates a todo.
+      operationId: createTodoFormData
+      tags:
+        - todo
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/TodoCreateRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Todo'
   /todos/{id}:
     get:
       summary: Returns a todo.
@@ -86,3 +127,21 @@ components:
         deadline:
           type: string
           format: date-time
+    TodoCreateRequest:
+      type: object
+      properties:
+        userId:
+          type: integer
+        title:
+          type: string
+        completed:
+          type: boolean
+        startTime:
+          type: string
+          format: date-time
+        deadline:
+          type: string
+          format: date-time
+      required:
+        - userId
+        - title
