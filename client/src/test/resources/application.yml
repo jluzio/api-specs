@@ -23,5 +23,6 @@ spring.cloud.openfeign:
         loggerLevel: FULL
       data-api:
         url: https://jsonplaceholder.typicode.com
+        contract: feign.Contract.Default
         loggerLevel: FULL
 #        loggerLevel: NONE

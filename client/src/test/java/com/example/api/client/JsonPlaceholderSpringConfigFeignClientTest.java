@@ -19,11 +19,14 @@ import org.springframework.context.annotation.Bean;
 @EnableFeignClients(clients = DefaultJsonPlaceholderApi.class)
 class JsonPlaceholderSpringConfigFeignClientTest {
 
-  @FeignClient(value = "data-api", configuration = DefaultContractConfiguration.class)
+  @FeignClient(value = "data-api")
+  // Instead of application.yml, use a configuration class in annotation
+//  @FeignClient(value = "data-api", configuration = DefaultContractConfiguration.class)
   interface DefaultJsonPlaceholderApi extends JsonPlaceholderApi {
 
   }
 
+  // Example of configuration class
   static class DefaultContractConfiguration {
 
     @Bean
