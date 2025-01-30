@@ -1,6 +1,7 @@
 package com.example.api.client.playground;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import com.example.api.jsonplaceholder.feign.api.v1.model.User;
 import lombok.extern.slf4j.Slf4j;
@@ -15,16 +16,16 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 @SpringBootTest
 @Slf4j
-class FeignTest {
+class FeignRetryerTest {
 
   @TestConfiguration
-  @EnableFeignClients(clients = ExampleApi.class)
+  @EnableFeignClients(clients = ExampleRetryerApi.class)
   static class TestConfig {
 
   }
 
-  @FeignClient(name = "example-api")
-  public interface ExampleApi {
+  @FeignClient(name = "data-retryer-api")
+  public interface ExampleRetryerApi {
 
     @GetMapping("/users/{id}")
     User getUser(@PathVariable("id") Integer id);
@@ -32,14 +33,13 @@ class FeignTest {
   }
 
   @Autowired
-  ExampleApi api;
+  ExampleRetryerApi api;
 
   @Test
   void test() {
-    var user = api.getUser(1);
-    log.info("output: {}", user);
-    assertThat(user)
-        .isNotNull();
+    // verify in logs that retry has occurred (default config is maxAttempts=5)
+    assertThatThrownBy(() -> api.getUser(1))
+        .isInstanceOf(feign.RetryableException.class);
   }
 
 }

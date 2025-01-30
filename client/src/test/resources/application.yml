@@ -21,8 +21,22 @@ spring.cloud.openfeign:
     config:
       default:
         loggerLevel: FULL
+      example-api:
+        url: https://jsonplaceholder.typicode.com
+        loggerLevel: FULL
+      #        loggerLevel: NONE
+      example-retryer-api:
+        url: http://doesnotexist.unknownserver.xpto
+        loggerLevel: FULL
+        retryer: feign.Retryer.Default
       data-api:
         url: https://jsonplaceholder.typicode.com
         contract: feign.Contract.Default
         loggerLevel: FULL
-#        loggerLevel: NONE
+
+
+#spring.cloud.loadbalancer.retry.enabled: true
+#spring.cloud.loadbalancer.retry.backoff.enabled: true
+#spring.cloud.loadbalancer.retry.retry-on-all-exceptions: true
+#spring.cloud.loadbalancer.retry.retry-on-all-operations: true
+#spring.cloud.loadbalancer.retry.max-retries-on-same-service-instance: 1
