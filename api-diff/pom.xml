@@ -9,7 +9,7 @@
   <version>1.0.0</version>
 
   <properties>
-    <openapi-diff-version>2.1.0-beta.11</openapi-diff-version>
+    <openapi-diff-version>2.1.3</openapi-diff-version>
   </properties>
 
   <build>
