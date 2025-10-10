@@ -112,9 +112,14 @@ components:
         $ref: '#/components/schemas/Todo'
     Todo:
       type: object
+      # extension
+      x-class-extra-annotation: '@java.lang.SuppressWarnings("open-api-extension: x-class-extra-annotation")'
       properties:
         id:
           type: integer
+          # extension
+          x-field-extra-annotation: '@jakarta.annotation.Generated("open-api-extension: x-field-extra-annotation")'
+          x-setter-extra-annotation: '@jakarta.annotation.Generated("open-api-extension: x-setter-extra-annotation")'
         userId:
           type: integer
         title:
