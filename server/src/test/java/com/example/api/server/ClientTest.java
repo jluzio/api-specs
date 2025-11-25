@@ -29,7 +29,7 @@ class ClientTest {
 
   @Configuration
   @Import({JsonPlaceholderApi.class})
-  static class TestConfig {
+  static class Config {
 
     @Bean
     RestClient restClient(RestClient.Builder builder) {

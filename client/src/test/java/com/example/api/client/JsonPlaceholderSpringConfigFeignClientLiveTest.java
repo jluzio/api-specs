@@ -8,16 +8,19 @@ import feign.Contract;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.context.TestConfiguration;
+import org.springframework.boot.test.autoconfigure.web.client.RestClientTest;
 import org.springframework.cloud.openfeign.EnableFeignClients;
+import org.springframework.cloud.openfeign.FeignAutoConfiguration;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 
-@SpringBootTest
+@RestClientTest
 @Slf4j
 @EnableFeignClients(clients = DefaultJsonPlaceholderApi.class)
-class JsonPlaceholderSpringConfigFeignClientTest {
+@Import({FeignAutoConfiguration.class})
+class JsonPlaceholderSpringConfigFeignClientLiveTest {
 
   @FeignClient(value = "data-api")
   // Instead of application.yml, use a configuration class in annotation
@@ -31,12 +34,12 @@ class JsonPlaceholderSpringConfigFeignClientTest {
 
     @Bean
     public Contract defaultContract() {
-      return new feign.Contract.Default();
+      return new Contract.Default();
     }
   }
 
-  @TestConfiguration
-  static class TestConfig {
+  @Configuration
+  static class Config {
 
   }
 

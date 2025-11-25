@@ -16,7 +16,7 @@ import org.springframework.context.annotation.Bean;
 class JsonPlaceholderFeignClientTest {
 
   @TestConfiguration
-  static class TestConfig {
+  static class Config {
 
     @Bean
     JsonPlaceholderApi jsonPlaceholderApi(ApiClient apiClient) {

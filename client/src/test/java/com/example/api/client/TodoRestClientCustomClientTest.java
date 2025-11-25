@@ -29,7 +29,7 @@ class TodoRestClientCustomClientTest {
 
   @Configuration
   @Import({TodoApi.class})
-  static class TestConfig {
+  static class Config {
 
     @Bean
     RestClient restClient(RestClient.Builder builder) {

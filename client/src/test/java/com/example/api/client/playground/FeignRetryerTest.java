@@ -19,7 +19,7 @@ class FeignRetryerTest {
 
   @TestConfiguration
   @EnableFeignClients(clients = ExampleRetryerApi.class)
-  static class TestConfig {
+  static class Config {
 
   }
 

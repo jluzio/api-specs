@@ -19,7 +19,7 @@ class FeignTest {
 
   @TestConfiguration
   @EnableFeignClients(clients = ExampleApi.class)
-  static class TestConfig {
+  static class Config {
 
   }
 

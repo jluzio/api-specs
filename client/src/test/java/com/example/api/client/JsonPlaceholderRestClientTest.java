@@ -23,13 +23,13 @@ import org.springframework.web.client.RestClient;
 
 @RestClientTest
 @Slf4j
-class JsonPlaceholderRestClientClientTest {
+class JsonPlaceholderRestClientTest {
 
   public static final String ENDPOINT = "https://jsonplaceholder.typicode.com";
 
   @Configuration
   @Import({JsonPlaceholderApi.class})
-  static class TestConfig {
+  static class Config {
 
     @Bean
     RestClient restClient(RestClient.Builder builder) {
