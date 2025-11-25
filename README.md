@@ -8,7 +8,7 @@ https://github.com/OpenAPITools/openapi-generator/tree/master/modules/openapi-ge
 ## generators
 - https://openapi-generator.tech/docs/generators/
   - java (client): https://openapi-generator.tech/docs/generators/java/
-    - library: resttemplate, webclient, feign, etc
+    - library: restclient, webclient, feign, etc
   - spring (server): https://openapi-generator.tech/docs/generators/spring
     - library: spring-boot, spring-cloud (feign), etc
 
