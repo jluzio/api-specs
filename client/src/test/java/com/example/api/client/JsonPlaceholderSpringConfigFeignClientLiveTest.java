@@ -2,7 +2,6 @@ package com.example.api.client;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import com.example.api.client.JsonPlaceholderSpringConfigFeignClientTest.DefaultJsonPlaceholderApi;
 import com.example.api.jsonplaceholder.feign.api.v1.JsonPlaceholderApi;
 import feign.Contract;
 import lombok.extern.slf4j.Slf4j;
@@ -18,7 +17,7 @@ import org.springframework.context.annotation.Import;
 
 @RestClientTest
 @Slf4j
-@EnableFeignClients(clients = DefaultJsonPlaceholderApi.class)
+@EnableFeignClients(clients = JsonPlaceholderSpringConfigFeignClientLiveTest.DefaultJsonPlaceholderApi.class)
 @Import({FeignAutoConfiguration.class})
 class JsonPlaceholderSpringConfigFeignClientLiveTest {
 
