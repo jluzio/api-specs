@@ -193,16 +193,15 @@
                   <configOptions>
                     <library>spring-boot</library>
                     <dateLibrary>java8</dateLibrary>
+                    <apiPackage>com.example.api.todo.api.v1</apiPackage>
+                    <modelPackage>com.example.api.todo.api.v1.model</modelPackage>
                     <interfaceOnly>true</interfaceOnly>
                     <skipDefaultInterface>true</skipDefaultInterface>
-                    <useBeanValidation>true</useBeanValidation>
-                    <useClassLevelBeanValidation>false</useClassLevelBeanValidation>
                     <useTags>true</useTags>
                     <java8>true</java8>
                     <useOptional>false</useOptional>
-                    <apiPackage>com.example.api.todo.api.v1</apiPackage>
-                    <modelPackage>com.example.api.todo.api.v1.model</modelPackage>
                     <useBeanValidation>true</useBeanValidation>
+                    <useClassLevelBeanValidation>false</useClassLevelBeanValidation>
                     <useJakartaEe>true</useJakartaEe>
                     <generateClientAsBean>true</generateClientAsBean>
                   </configOptions>
