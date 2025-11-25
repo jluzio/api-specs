@@ -2,8 +2,6 @@ package com.example.api.client;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import com.example.api.client.test.LiveTestSupport;
-import com.example.api.jsonplaceholder.feign.api.v1.JsonPlaceholderApi;
 import com.example.api.todo.restclient.api.ApiClient;
 import com.example.api.todo.restclient.api.v1.TodoApi;
 import com.example.api.todo.restclient.api.v1.model.Todo;
@@ -12,24 +10,16 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.client.AutoConfigureMockRestServiceServer;
 import org.springframework.boot.test.autoconfigure.web.client.RestClientTest;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.context.TestConfiguration;
-import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
-import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
-import org.springframework.test.context.junit.jupiter.EnabledIf;
 import org.springframework.test.web.client.ExpectedCount;
 import org.springframework.test.web.client.MockRestServiceServer;
 import org.springframework.test.web.client.match.MockRestRequestMatchers;
 import org.springframework.test.web.client.response.MockRestResponseCreators;
 import org.springframework.web.client.RestClient;
-import org.springframework.web.client.RestTemplate;
 
 @RestClientTest
 @Slf4j

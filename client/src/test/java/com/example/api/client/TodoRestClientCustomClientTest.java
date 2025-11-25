@@ -2,9 +2,9 @@ package com.example.api.client;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import com.example.api.todo.restclientcustom.api.v1.model.Todo;
 import com.example.api.todo.restclientcustom.api.ApiClient;
 import com.example.api.todo.restclientcustom.api.v1.TodoApi;
+import com.example.api.todo.restclientcustom.api.v1.model.Todo;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;

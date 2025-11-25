@@ -1,6 +1,5 @@
 package com.example.api.client.playground;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import com.example.api.jsonplaceholder.feign.api.v1.model.User;

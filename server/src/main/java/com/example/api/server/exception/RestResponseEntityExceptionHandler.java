@@ -2,7 +2,6 @@ package com.example.api.server.exception;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Builder;
 import lombok.RequiredArgsConstructor;
 import lombok.Value;
