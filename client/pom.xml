@@ -291,6 +291,10 @@
                   <typeMappings>
                     <typeMapping>OffsetDateTime=java.time.Instant</typeMapping>
                   </typeMappings>
+                  <!-- Filter APIs generated (typically grouped by tags) -->
+                  <apisToGenerate>Todo</apisToGenerate>
+                  <!-- Normalize: in this case, filter paths generated (with operationId) -->
+                  <openapiNormalizer>FILTER=operationId:getTodos|getTodo</openapiNormalizer>
                   <configOptions>
                     <library>restclient</library>
                     <dateLibrary>java8</dateLibrary>
