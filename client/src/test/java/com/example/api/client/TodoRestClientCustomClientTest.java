@@ -1,40 +1,34 @@
-package com.example.api.server;
+package com.example.api.client;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import com.example.api.jsonplaceholder.api.ApiClient;
-import com.example.api.jsonplaceholder.api.v1.JsonPlaceholderApi;
-import com.example.api.jsonplaceholder.api.v1.model.Post;
-import com.example.api.jsonplaceholder.api.v1.model.User;
+import com.example.api.todo.restclientcustom.api.v1.model.Todo;
+import com.example.api.todo.restclientcustom.api.ApiClient;
+import com.example.api.todo.restclientcustom.api.v1.TodoApi;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.client.RestClientTest;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
-import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.test.web.client.ExpectedCount;
 import org.springframework.test.web.client.MockRestServiceServer;
 import org.springframework.test.web.client.match.MockRestRequestMatchers;
 import org.springframework.test.web.client.response.MockRestResponseCreators;
 import org.springframework.web.client.RestClient;
-import org.springframework.web.client.RestTemplate;
 
 @RestClientTest
 @Slf4j
-class ClientTest {
+class TodoRestClientCustomClientTest {
 
-  public static final String ENDPOINT = "https://jsonplaceholder.typicode.com";
+  public static final String ENDPOINT = "https://some-server.com";
 
   @Configuration
-  @Import({JsonPlaceholderApi.class})
+  @Import({TodoApi.class})
   static class TestConfig {
 
     @Bean
@@ -46,15 +40,13 @@ class ClientTest {
 
     @Bean
     ApiClient apiClient(RestClient restClient) {
-      // using default basePath, which is the same of ENDPOINT
       return new ApiClient(restClient)
-//          .setBasePath(ENDPOINT)
-          ;
+          .setBasePath(ENDPOINT);
     }
   }
 
   @Autowired
-  JsonPlaceholderApi api;
+  TodoApi api;
   @Autowired
   RestClient restClient;
   @Autowired
@@ -68,20 +60,20 @@ class ClientTest {
     var json = """
         {"id": 1, "title": "some-todo"}
         """;
-    var expected = objectMapper.readValue(json, User.class);
+    var expected = objectMapper.readValue(json, Todo.class);
 
-    mockRestServiceServer.expect(ExpectedCount.twice(), MockRestRequestMatchers.requestTo(ENDPOINT + "/users/1"))
+    mockRestServiceServer.expect(ExpectedCount.twice(), MockRestRequestMatchers.requestTo(ENDPOINT + "/todos/1"))
         .andRespond(MockRestResponseCreators.withSuccess(json, MediaType.APPLICATION_JSON));
 
     var restClientResponse = restClient.get()
-        .uri("/users/1")
+        .uri("/todos/1")
         .retrieve()
-        .body(User.class);
+        .body(Todo.class);
     log.info("restClientResponse: {}", restClientResponse);
     assertThat(restClientResponse)
         .isEqualTo(expected);
 
-    var apiResponse = api.getUser(1);
+    var apiResponse = api.getTodo(1);
     log.info("apiResponse: {}", apiResponse);
     assertThat(apiResponse)
         .isNotNull()
